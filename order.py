@@ -4,12 +4,9 @@ class Order:
     all_orders = []  # Class variable to store all Order instances
 
     def __init__(self, customer, coffee, price):
-        from customer import Customer  # Local import to avoid circular import
-        from coffee import Coffee
-
-        if not isinstance(customer, Customer):
+        if not hasattr(customer, "name"):  # Check for name attribute
             raise TypeError("Customer must be of type Customer.")
-        if not isinstance(coffee, Coffee):
+        if not hasattr(coffee, "name"):  # Check for name attribute
             raise TypeError("Coffee must be of type Coffee.")
         if not isinstance(price, (float, int)) or not (1.0 <= price <= 10.0):
             raise ValueError("Price must be a float between 1.0 and 10.0.")
@@ -31,4 +28,3 @@ class Order:
     @property
     def price(self):
         return self._price
-

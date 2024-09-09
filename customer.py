@@ -4,7 +4,7 @@ class Customer:
     all_customers = []  # Class variable to store all Customer instances
 
     def __init__(self, name):
-        self.name = name  # Will invoke the name setter
+        self.name = name  # This invokes the name setter
         Customer.all_customers.append(self)
 
     @property
@@ -20,32 +20,14 @@ class Customer:
 
     # Return all orders for this customer
     def orders(self):
-        from order import Order  # Local import to avoid circular import
+        from order import Order  # Local import
         return [order for order in Order.all_orders if order.customer == self]
 
-    # Return a unique list of all coffees ordered by this customer
+    # Return all coffees for this customer
     def coffees(self):
         return list(set(order.coffee for order in self.orders()))
 
-    # Create a new order for this customer
+    # Create a new order
     def create_order(self, coffee, price):
-        from order import Order  # Local import to avoid circular import
+        from order import Order  # Local import
         return Order(self, coffee, price)
-
-
-if __name__ == "__main__":
-    # Basic test cases
-    from coffee import Coffee
-
-    customer1 = Customer("John")
-    customer2 = Customer("Sara")
-    coffee1 = Coffee("Espresso")
-    coffee2 = Coffee("Latte")
-
-    customer1.create_order(coffee1, 5.0)
-    customer1.create_order(coffee2, 6.0)
-    customer2.create_order(coffee1, 4.5)
-
-    print(customer1.name)  # John
-    print(customer1.orders())  # [Order instance for Espresso, Latte]
-    print(customer1.coffees())  # [Coffee instances for Espresso, Latte]
