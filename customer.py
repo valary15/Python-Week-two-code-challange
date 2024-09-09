@@ -1,6 +1,4 @@
 # customer.py
-from order import Order
-
 
 class Customer:
     all_customers = []  # Class variable to store all Customer instances
@@ -22,6 +20,7 @@ class Customer:
 
     # Return all orders for this customer
     def orders(self):
+        from order import Order  # Local import to avoid circular import
         return [order for order in Order.all_orders if order.customer == self]
 
     # Return a unique list of all coffees ordered by this customer
@@ -30,6 +29,7 @@ class Customer:
 
     # Create a new order for this customer
     def create_order(self, coffee, price):
+        from order import Order  # Local import to avoid circular import
         return Order(self, coffee, price)
 
 
