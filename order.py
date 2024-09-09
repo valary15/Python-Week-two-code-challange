@@ -1,4 +1,7 @@
 # order.py
+from customer import Customer  # Import the Customer class
+from coffee import Coffee      # Import the Coffee class
+
 class Order:
     all_orders = []  # Class variable to store all Order instances
 
